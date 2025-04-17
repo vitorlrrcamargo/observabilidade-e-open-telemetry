@@ -1,0 +1,21 @@
+services:
+  input:
+    build: .
+    environment:
+      - SERVICE_MODE=input
+      - SERVICE_B_URL=http://weather:8080
+    ports:
+      - "8081:8080"
+
+  weather:
+    build: .
+    environment:
+      - SERVICE_MODE=weather
+      - WEATHER_API_KEY=d4c542abe1ee46039ac220800251504
+    ports:
+      - "8082:8080"
+
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
